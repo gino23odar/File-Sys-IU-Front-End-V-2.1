@@ -1,0 +1,950 @@
+:root{
+  --primary-color: #044E51;
+  --primary-color-alpha: #005fff1a;
+}
+
+html,
+body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+.appWrapper{
+  display: flex;
+  flex: 1;
+  height: 100%;
+  box-shadow: rgba(0,0,0,0.33) 0px 2px 3px 0px;
+  /*should I push it to the right?*/
+}
+
+.authForm-cont {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.authForm-contImage {
+  flex: 3;
+  display: flex;
+  box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.05);
+}
+
+.authForm-contImage img {
+  width: 100%;
+  height: 100%;
+}
+
+
+@media screen and (max-width: 800px) {
+  .authForm-cont {
+    flex-direction: column;
+  }
+
+  .authForm-contFields {
+    justify-content: flex-start;
+  }
+
+  .authForm-contImage {
+    height: 100px;
+    flex: none;
+    box-shadow: none;
+  }
+
+  .authForm-contImage img {
+    object-fit: cover;
+  }
+}
+
+.authForm-contFields {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  background: #044E51;
+}
+
+.authForm-contFields-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 2rem;
+  box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
+  border-radius: 50px;
+  transition: 0.8s ease;
+  background: #fff;
+}
+
+.authForm-contFields-content p {
+  font-size: 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #05245a;
+  font-weight: 900;
+}
+
+.authForm-contFields-content-button {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.authForm-contFields-content-button button {
+  border-radius: 4px;
+  background: #000d0e;
+  border: 1px solid #005fff;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  padding: 0.7rem 1.2rem;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.authForm-contFields-content-button button:hover {
+  background: #0066ff;
+}
+
+.authForm-contFields-account {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 0.2rem;
+}
+
+.authForm-contFields-account p {
+  font-size: 14px;
+  color: #000;
+  font-weight: 500;
+}
+
+.authForm-contFields-account span {
+  color: #05245a;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.create-channelCont {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.create-channelHeader {
+  display: flex;
+  align-items: center;
+  font-family: Helvetica Neue, sans-serif;
+  justify-content: space-between;
+  height: 62px;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+  padding-right: 20px;
+}
+
+.create-channel-button-wrapper {
+  height: 82px;
+  background: #f7f6f8;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom-right-radius: 16px;
+  padding: 0px 10px;
+}
+
+.create-channel-button-wrapper p {
+  background: var(--primary-color);
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px 20px;
+  color: #ffffff;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.channelCont {
+  height: 100%;
+  width: 100%;
+}
+.channelCont-dark{
+  background-color: #000;
+  height: 100%;
+  width: 100%;
+}
+
+.channel-list-cont {
+  display: flex;
+  /* height: 800px; */
+  height: 100%;
+  box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.channel-empty-cont {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding-bottom: 20px;
+}
+
+.channel-list-cont-responsive {
+  display: none;
+  height: 100%;
+  box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  width: 90%;
+  top: 0%;
+  z-index: 5;
+  transition: 0.8s ease;
+}
+
+.channel-empty1 {
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 120%;
+  color: #2c2c30;
+  margin-bottom: 10px;
+}
+.channel-empty2 {
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 14px;
+  line-height: 120%;
+  margin: 0;
+  color: #858688;
+}
+
+.channel-listHeader {
+  padding-left: 16px;
+  height: 62px;
+}
+
+.channel-listHeader-text {
+  font-family: Helvetica Neue, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 28px;
+  /*text-align: center;*/
+  color: #ffffff;
+}
+
+.channel-list__list-wrapper {
+  display: flex;
+  flex-direction: column;
+  background: var(--primary-color);
+  width: 240px;
+}
+
+@media screen and (max-width: 960px) {
+  .channel-list-cont {
+    display: none;
+  }
+
+  .team-nameWrapper {
+    height: 100%;
+    max-width: unset;
+  }
+
+  .team-name-multi {
+    margin-right: 8px;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .team-name.user {
+    font-size: 10px;
+    margin: 5px;
+    text-align: center;
+  }
+
+  .channel-list-cont-responsive {
+    display: flex;
+  }
+
+  .channel-list__list-wrapper {
+    width: 100%;
+  }
+
+  .channel-list-cont-toggle {
+    display: flex;
+  }
+
+  .channel-search-inputWrapper {
+    width: 90%;
+    padding-left: 10px;
+    justify-content: flex-start;
+  }
+
+  .channel-search-inputText {
+    width: inherit;
+  }
+
+  .channel-search-results {
+    top: 100%;
+    left: 5%;
+  }
+}
+
+.channel-list-sidebar{
+  width: 80px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+    var(--primary-color);
+    box-shadow: 1px 0px 0px rgba(0,0,0,0.5);
+}
+.channel-list-sidebar-icon1 {
+  width: 40px;
+  height: 40px;
+  margin: 18px;
+  border-radius: 100px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.33);
+}
+.channel-list-sidebar-icon2 {
+  width: 50px;
+  height: 50px;
+  margin: 12px;
+  border-radius: 100px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.33);
+  cursor: pointer;
+}
+
+.channel-name-inputWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 169px;
+  padding-left: 20px;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* check this*/
+.channel-search-cont {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 2px solid #00000033;
+}
+
+.channel-search-inputWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+  width: 95%;
+}
+
+.channel-search-inputWrapper:focus-within {
+  border: 1px solid #fff;
+}
+
+.channel-search-inputIcon {
+  width: 30px;
+  justify-content: center;
+  display: flex;
+}
+
+.channel-search-inputText {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 16px;
+  outline: none;
+}
+
+.channel-search-results {
+  position: fixed;
+  height: fit-content;
+  width: 300px;
+  background: #fff;
+  border: 1px solid #e9e9ea;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  z-index: 10;
+  left: 1220px;
+  top: 120px;
+}
+
+.channel-search-resultsHeader {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  font-family: Helvetica Neue, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 120%;
+  color: #858688;
+  margin-left: 12px;
+}
+
+.channel-search-resultsHeader i {
+  font-weight: normal;
+  margin-left: 12px;
+}
+
+.channel-search-resultCont {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+.channel-search-resultCont-focused {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  background: var(--primary-color-alpha);
+}
+
+.channel-search-resultCont:hover {
+  background: var(--primary-color-alpha);
+  cursor: pointer;
+}
+
+.channel-search-result-user {
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+}
+
+.result-sign {
+  height: 25px;
+  width: 30px;
+  background: var(--primary-color);
+  border-radius: 22px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 120%;
+  color: #ffffff;
+}
+
+.channel-search-result-text {
+  width: 100%;
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 120%;
+  color: #2c2c30;
+}
+
+/* check till here */
+
+.channel-search-inputText {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 16px;
+  outline: none;
+}
+
+.channel-search-inputWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+  width: 95%;
+}
+
+.channel-preview-item {
+  display: flex;
+  align-items: center;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  padding: 0px 20px;
+  height: 100%;
+  width: 100%;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+
+
+.channel-preview-item.single .str-chat__avatar {
+  margin-right: 12px;
+}
+
+
+/* should I let them be the default?*/
+.channel-previewWrapper {
+  height: 35px;
+  display: flex;
+  align-items: center;
+}
+
+.channel-previewWrapper-selected {
+  height: auto;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font-weight: bold;
+  margin-right: 16px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.channel-previewWrapper:hover {
+  background: rgba(0, 0, 0, 0.2);
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font-weight: bold;
+  margin-right: 16px;
+  cursor: pointer;
+}
+/* until here*/
+
+.authForm-contFields-content-input {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 1rem 0rem;
+}
+
+.authForm-contFields-content-input label {
+  margin-bottom: 0.45rem;
+  color: rgb(61, 79, 88);
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.7px;
+  line-height: 1.3;
+}
+
+.authForm-contFields-content-input input {
+  padding: 0.55rem 0.4rem;
+  border: 1px solid rgb(184, 196, 194);
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: all 150ms ease-in-out 0s;
+  width: 85%;
+  background: #fff;
+}
+
+.authForm-contFields-content-input input::placeholder {
+  color: #b1b1b1;
+  width: 100%;
+  font-weight: unset;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.authForm-contFields-content-input input:hover {
+  border-color: #dcdddd;
+}
+
+.authForm-contFields-content-input input:focus,
+.authForm-contFields-content-input input:active {
+  box-shadow: 0px 0px 0px 1.5px #005fff;
+  border-color: #005fff;
+}
+
+.authForm-contFields-content-input textarea {
+  padding: 0.55rem 0.4rem;
+  border: 1px solid rgb(184, 196, 194);
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: all 150ms ease-in-out 0s;
+  width: 85%;
+  background: #fff;
+}
+
+.authForm-contFields-content-input textarea::placeholder {
+  color: #b1b1b1;
+  width: 100%;
+  font-weight: unset;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.authForm-contFields-content-input textarea:hover {
+  border-color: #dcdddd;
+}
+
+.authForm-contFields-content-input textarea:focus,
+.authForm-contFields-content-input textarea:active {
+  box-shadow: 0px 0px 0px 1.5px #005fff;
+  border-color: #005fff;
+}
+
+.authForm-contFields-content-input-password {
+  position: absolute;
+  right: 13%;
+  top: 50%;
+  cursor: pointer;
+}
+
+.icon1, .icon2 {
+  font-family: Helvetica Neue, sans-serif;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-channelHeader-cont {
+  position: relative;
+  height: 62px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 40px;
+  color: #ffffff;
+  background: #080808;
+  z-index: 1;
+}
+
+.register-channelFooter-cont{ 
+  display: flex;
+  background-color: #000;
+  width: auto;
+  height: auto;
+  bottom: 0px;
+}
+
+.registerForm-cont {
+  min-height: 80vh; 
+  display: flex;
+  flex-direction: row;
+}
+
+.registerForm-contFields-cont{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
+  border-radius: 50px;
+  transition: 0.8s ease;
+  background: #fff;
+}
+
+.registerForm-contFields-contInput {
+  display: inline-block;
+  position: relative;
+  margin: 1rem 0rem;
+}
+
+.registerForm-contFields-contInput label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: rgb(61, 79, 88);
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0.7px;
+  line-height: 1.3;
+}
+
+.registerForm-contFields-contInput input {
+  display: block;
+  padding: 0.55rem 0.4rem;
+  border: 1px solid rgb(184, 196, 194);
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: all 150ms ease-in-out 0s;
+  width: auto;
+  background: #fff;
+}
+
+.registerForm-contFields-contInput input::placeholder {
+  color: #b1b1b1;
+  width: 100%;
+  font-weight: unset;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.registerForm-contFields-contInput input:hover {
+  border-color: #dcdddd;
+}
+
+.registerForm-contFields-contInput input:focus,
+.registerForm-contFields-contInput input:active {
+  box-shadow: 0px 0px 0px 1.5px #005fff;
+  border-color: #005fff;
+}
+
+#beschreibung{
+  height: 6em;
+}
+
+.registerTable-gridCont{
+  background-color: #ffffff;
+  color: rgb(255, 255, 255);
+}
+
+.team-channelHeader-cont {
+  position: relative;
+  height: 62px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background: #ffffff;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+  border-top-right-radius: 16px;
+  z-index: 1;
+}
+
+.team-channelHeader-channelWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.team-channelHeader-channelWrapper svg {
+  cursor: pointer;
+}
+
+.team-channelHeader-name {
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  color: #2c2c30;
+  margin-right: 8px;
+}
+
+.team-nameWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.team-nameWrapper {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.team-name-multi {
+  display: flex;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.team-name-multi:nth-child(3) {
+  margin-right: 0px;
+}
+
+.team-name.user {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.team-channel-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.team-channel-listHeader {
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-channel-listHeader-title {
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 13px;
+  line-height: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.66);
+  margin-bottom: 10px;
+}
+
+.team-channel-listMessage {
+  color: #ffffff;
+  padding: 0 16px;
+}
+
+.team-channel-inputControl{
+  display: flex;
+}
+.team-channel-deleteButton-return{
+  display: flex;
+  position: relative;
+  align-items: center;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  line-height: 16px;
+  height: 60px;
+  width: auto;
+  background-color: #fa0000;
+  border-radius: 5%;
+  top: 1em;
+  bottom: 20px;
+  left: 20px;
+  z-index: 6;
+}
+
+.team-channel-denyButton-return{
+  display: flex;
+  position: relative;
+  align-items: center;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  line-height: 16px;
+  height: 60px;
+  width: auto;
+  background-color: #f58d2b;
+  border-radius: 5%;
+  top: 1em;
+  bottom: 20px;
+  left: 20px;
+  z-index: 6;
+}
+
+.team-channel-statusChangeButton{
+  display: flex;
+  position: relative;
+  align-items: center;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  line-height: 16px;
+  height: 60px;
+  width: auto;
+  background-color: #1c63ce;
+  border-radius: 5%;
+  top: 1em;
+  bottom: 20px;
+  left: 20px;
+  z-index: 6;
+}
+
+.team-channel-registrationButton{
+  display: flex;
+  position: relative;
+  align-items: center;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  line-height: 16px;
+  height: 60px;
+  width: auto;
+  background-color: var(--primary-color);
+  border-radius: 5%;
+  bottom: -8%;
+  left: 20px;
+  z-index: 6;
+}
+
+.team-channel-registrationButton-return{
+  display: flex;
+  position: relative;
+  align-items: center;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 20px;
+  color: #ffffff;
+  line-height: 16px;
+  height: 60px;
+  width: auto;
+  background-color: var(--primary-color);
+  border-radius: 5%;
+  top: 1em;
+  bottom: 20px;
+  left: 20px;
+  z-index: 6;
+}
+
+.tooltip {
+  display: flex;
+  border-bottom: 0px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgba(255, 255, 255, 0.66);
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: sticky;
+  z-index: 7;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.user-item-invite-empty {
+  height: 28px;
+  width: 28px;
+  background: #f7f6f8;
+  border: 1px solid #dedddf;
+  border-radius: 14px;
+  box-sizing: border-box;
+  margin-left: 2px;
+}
+
+.user-itemWrapper {
+  display: flex;
+  align-items: center;
+  margin: 0px 20px;
+  justify-content: space-between;
+}
+
+.user-item-name {
+  font-weight: 500;
+}
+
+.user-item-nameWrapper {
+  display: flex;
+  align-items: center;
+  flex: 2;
+  text-align: left;
+}
+
+.user-listCont {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.user-listHeader {
+  display: flex;
+  align-items: center;
+  margin: 0px 20px;
+  justify-content: space-between;
+}
+
+.user-listMessage {
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 16px;
+  color: #2c2c30;
+  margin: 20px;
+}
