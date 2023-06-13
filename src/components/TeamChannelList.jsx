@@ -27,7 +27,7 @@ const TeamChannelList = ({children, error=false, loading, type, isCrt, setIsCrt,
     <div className='team-channel-list'>
       <div className='team-channel-listHeader'>
         <p className='team-channel-listHeader-title'>
-        {type === 'team'? 'Channels' : 'them DMs'} 
+        {type === 'team'? 'Channels' : 'private Nachrichten'} 
         </p>
         {type === 'team'
         ? ''

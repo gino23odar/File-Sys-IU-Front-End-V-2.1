@@ -35,7 +35,7 @@ const RegisterForm = ({setIsRegis, setIsVis}) => {
       <div className='registerForm-cont'>
         <div className='authForm-contFields'>
           <div className='registerForm-contFields-cont'>
-            <form>
+            <form onSubmit={submitRegistration}>
               <div className='authForm-contFields-content-input'>
                 <label htmlFor='Student'>Deine Name</label>
                 <input name='Student' type='text' placeholder='Name' onChange={(e)=>{ setStudent(e.target.value);}} required/>
@@ -54,13 +54,13 @@ const RegisterForm = ({setIsRegis, setIsVis}) => {
               </div>
               <div className='authForm-contFields-content-input'>
                 <label htmlFor='Beschreibung'>Beschreibung</label>
-                <textarea id='beschreibung' name='Beschreibung' type='text' placeholder='Beschreibung' onChange={(e)=>{ setBeschreibung(e.target.value);}} required/>
+                <textarea id='beschreibung' name='Beschreibung' type='text' placeholder='Beschreibung' onChange={(e)=>{ setBeschreibung(e.target.value);}} />
               </div>
               <div>
                 {/* <input name='Datum' type='hidden'>{currentDate()}</input>*/}
               </div>
               <div className='authForm-contFields-content-button'>
-                <button onClick={submitRegistration}>Einreichen</button>
+                <button>Einreichen</button>
               </div>
             </form>
           </div>
@@ -68,7 +68,7 @@ const RegisterForm = ({setIsRegis, setIsVis}) => {
       </div>
       <div className='register-channelFooter-cont'>
         <button className = 'team-channel-registrationButton-return' onClick={()=>{if(setIsRegis){setIsRegis((prevState)=> !prevState)}}}>Anmeldungen</button>
-        <button className = 'team-channel-registrationButton-return' onClick={()=>{if(setIsVis){setIsVis((prevState)=> !prevState)}}}>--&#62;List&#60;--</button>
+        <button className = 'team-channel-registrationButton-return' onClick={()=>{if(setIsVis){setIsVis((prevState)=> !prevState)}}}>Liste</button>
       </div>
     </div>
   )

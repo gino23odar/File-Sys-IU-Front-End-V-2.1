@@ -67,7 +67,7 @@ const ResultsDropdown = ({ teamChannels, directChannels, setChannel, queryId, lo
       )}
       {!loading && !directChannels.length ? (
         <p className='channel-search-resultsHeader'>
-          <i>Keine DMs gefunden...</i>
+          <i>Keine private Nachrichten gefunden...</i>
         </p>
       ) : (
         directChannels?.map((channel, i) => (

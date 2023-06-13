@@ -31,7 +31,7 @@ const CreateChannel = ({createTp, setIsCrt}) => {
   return (
     <div className='create-channelCont'>
       <div className='create-channelHeader'>
-        <p>DM schicken</p>
+        <p>private Nachrichten schicken</p>
       </div>
       <UserList setSelectedUsers={setSelectedUsers}/>
       <div className='create-channel-button-wrapper' onClick={createChannel}>

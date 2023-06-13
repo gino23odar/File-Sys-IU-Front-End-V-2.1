@@ -19,6 +19,7 @@ const Auth = () => {
   const [form, setForm] = useState(initialState);
   //hook to change between sing up and sign in displays.
   const [isSignup, setIsSignup] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   //update state field
   const handleChange=(e)=>{
@@ -36,24 +37,45 @@ const Auth = () => {
     const {username, password, phoneNr, avatarURL} = form;
     //get the URL
     const URL = 'https://file-iu-sys.herokuapp.com/auth';
-    //make the request to back-end depending on if user is login in or signing up. 
-    const {data: {token, userId, hashedPass, fullName}} = await axios.post(`${URL}/${isSignup? 'signup' : 'login'}`, {
-      username, password, fullName: form.fullName, phoneNr, avatarURL
-    });
-
-    // store the data it gets back on cookies.
-    cookies.set('token', token);
-    cookies.set('username', username);
-    cookies.set('fullName', fullName);
-    cookies.set('userId', userId);
-
-    if(isSignup){
-      cookies.set('phone Nr.', phoneNr);
-      cookies.set('avatarURL', avatarURL);
-      cookies.set('hashedPass', hashedPass);
+    try {
+      // make the request to the backend depending on if the user is logging in or signing up
+      const { data: { token, userId, hashedPass, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
+        username,
+        password,
+        fullName: form.fullName,
+        phoneNr,
+        avatarURL
+      });
+  
+      // store the data it gets back on cookies
+      cookies.set('token', token);
+      cookies.set('username', username);
+      cookies.set('fullName', fullName);
+      cookies.set('userId', userId);
+  
+      if (isSignup) {
+        cookies.set('phone Nr.', phoneNr);
+        cookies.set('avatarURL', avatarURL);
+        cookies.set('hashedPass', hashedPass);
+      }
+  
+      // reload browser
+      window.location.reload();
+    } catch (error) {
+      // handle the error response from the backend
+      if (error.response && error.response.status === 401) {
+        // show "wrong password + user combination" message to the user
+        setErrorMessage('Authentifizierungsfehler');
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 5000);
+      } else {
+        setErrorMessage('falsches Kenntwort');
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 5000);
+      }
     }
-    //reload browser
-    window.location.reload();
   }
 
   //switch state of signin to the one not currently in use.
@@ -89,7 +111,7 @@ const Auth = () => {
             {isSignup && (
               <div className='authForm-contFields-content-input'>
                 <label htmlFor='avatarURL'>Avatar URL</label>
-                <input name='avatarURL' type='text' placeholder='Avatar URL' onChange={handleChange} required/>
+                <input name='avatarURL' type='text' placeholder='Avatar URL' onChange={handleChange}/>
               </div>
             )}
             <div className='authForm-contFields-content-input'>
@@ -102,6 +124,7 @@ const Auth = () => {
                 <input name='confirmPass' type='password' placeholder='Kennwort bestätigen' onChange={handleChange} required/>
               </div>
             )}
+            {errorMessage && <div className='errorMessage'>{errorMessage}</div>}
             <div className='authForm-contFields-content-button'>
               <button>{isSignup? 'Anmelden': 'Einloggen'}</button>
             </div>
