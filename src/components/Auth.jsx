@@ -39,7 +39,7 @@ const Auth = () => {
     const URL = 'https://file-iu-sys.herokuapp.com/auth';
     try {
       // make the request to the backend depending on if the user is logging in or signing up
-      const { data: { token, userId, hashedPass, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
+      const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
         username,
         password,
         fullName: form.fullName,
@@ -56,7 +56,7 @@ const Auth = () => {
       if (isSignup) {
         cookies.set('phone Nr.', phoneNr);
         cookies.set('avatarURL', avatarURL);
-        cookies.set('hashedPass', hashedPass);
+        cookies.set('hashedPass', hashedPassword);
       }
   
       // reload browser
@@ -104,8 +104,8 @@ const Auth = () => {
             </div>
             {isSignup && (
               <div className='authForm-contFields-content-input'>
-                <label htmlFor='phoneNr'>Telefonnummer #</label>
-                <input name='phoneNr' type='text' placeholder='Telefonnummer' onChange={handleChange} required/>
+                <label htmlFor='phoneNr'>Email</label>
+                <input name='phoneNr' type='text' placeholder='Email' onChange={handleChange} required/>
               </div>
             )}
             {isSignup && (
