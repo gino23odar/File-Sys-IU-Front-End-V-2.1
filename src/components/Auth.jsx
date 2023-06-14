@@ -20,10 +20,15 @@ const Auth = () => {
   //hook to change between sing up and sign in displays.
   const [isSignup, setIsSignup] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+  const [passwordMatch, setPasswordMatch] = useState(true);
 
   //update state field
   const handleChange=(e)=>{
     setForm({...form, [e.target.name]: e.target.value});
+      // Check password matching
+    if (e.target.name === "confirmPass") {
+      setPasswordMatch(e.target.value === form.password);
+    }
   }
 
   /**
@@ -120,9 +125,17 @@ const Auth = () => {
             </div>
             {isSignup && (
               <div className='authForm-contFields-content-input'>
-                <label htmlFor='confirmPass'>Kennwort bestätigen</label>
-                <input name='confirmPass' type='password' placeholder='Kennwort bestätigen' onChange={handleChange} required/>
-              </div>
+              <label htmlFor='confirmPass'>Kennwort bestätigen</label>
+              <input
+                name='confirmPass'
+                type='password'
+                placeholder='Kennwort bestätigen'
+                onChange={handleChange}
+                required
+                pattern={form.password}
+              />
+              {!passwordMatch && <div className='errorMessage'>Make sure you use the same password.</div>}
+            </div>
             )}
             {errorMessage && <div className='errorMessage'>{errorMessage}</div>}
             <div className='authForm-contFields-content-button'>

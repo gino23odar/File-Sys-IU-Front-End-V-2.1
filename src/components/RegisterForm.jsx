@@ -1,13 +1,17 @@
 import React, {useState} from 'react';
+import Cookies from 'universal-cookie';
 import Axios from 'axios';
+
+const cookies = new Cookies();
 
 
 const RegisterForm = ({setIsRegis, setIsVis}) => {
-  const [student, setStudent] = useState('');
   const [fach, setFach] = useState('');
   const [dateiName, setDateiName] = useState('');
   const [seite, setSeite] = useState('');
   const [beschreibung, setBeschreibung] = useState('');
+
+  const student = cookies.get('phone Nr.').split('@')[0] || cookies.get('fullName');
 
   /**
    * The function submits the registration form outlined in the return statement
@@ -35,11 +39,14 @@ const RegisterForm = ({setIsRegis, setIsVis}) => {
       <div className='registerForm-cont'>
         <div className='authForm-contFields'>
           <div className='registerForm-contFields-cont'>
+            <div>
+              <p>Deine Name: {student}</p>
+            </div>
             <form onSubmit={submitRegistration}>
-              <div className='authForm-contFields-content-input'>
+              {/* <div className='authForm-contFields-content-input'>
                 <label htmlFor='Student'>Deine Name</label>
                 <input name='Student' type='text' placeholder='Name' onChange={(e)=>{ setStudent(e.target.value);}} required/>
-              </div>
+              </div> */}
               <div className='authForm-contFields-content-input'>
                 <label htmlFor='Fach'>Fach</label>
                 <input name='Fach' type='text' placeholder='Fach' onChange={(e)=>{ setFach(e.target.value);}} required/>
