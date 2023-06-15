@@ -110,7 +110,15 @@ const Auth = () => {
             {isSignup && (
               <div className='authForm-contFields-content-input'>
                 <label htmlFor='phoneNr'>Email</label>
-                <input name='phoneNr' type='text' placeholder='Email' onChange={handleChange} required/>
+                <input
+                  name='phoneNr'
+                  type='text'
+                  placeholder='Email'
+                  onChange={handleChange}
+                  required
+                  pattern='^[a-zA-Z0-9._%+-]+@(iubh-fernstudium\.de|iu\.de|iu\.org)$'
+                  title='Bitte verwenden Sie eine gültige IU-EMail: @iubh-fernstudium.de, @iu.de, @iu.org'
+                />
               </div>
             )}
             {isSignup && (
@@ -134,7 +142,7 @@ const Auth = () => {
                 required
                 pattern={form.password}
               />
-              {!passwordMatch && <div className='errorMessage'>Make sure you use the same password.</div>}
+              {!passwordMatch && <div className='errorMessage'>Stellen Sie sicher, dass Sie dasselbe Passwort verwenden.</div>}
             </div>
             )}
             {errorMessage && <div className='errorMessage'>{errorMessage}</div>}
