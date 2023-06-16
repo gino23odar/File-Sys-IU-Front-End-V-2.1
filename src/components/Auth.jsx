@@ -68,14 +68,20 @@ const Auth = () => {
       window.location.reload();
     } catch (error) {
       // handle the error response from the backend
-      if (error.response && error.response.status === 401) {
+      if (error.response && error.response.status === 400) {
         // show "wrong password + user combination" message to the user
-        setErrorMessage('Authentifizierungsfehler');
+        setErrorMessage('Benutzername nicht gefunden.');
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 5000);
+      } else if (error.response && error.response.status === 500){
+        setErrorMessage('falsches Kenntwort');
         setTimeout(() => {
           setErrorMessage('');
         }, 5000);
       } else {
-        setErrorMessage('falsches Kenntwort');
+        // show generic error message
+        setErrorMessage('Ein Fehler ist aufgetreten. Bitte versuchen Sie es später noch einmal.');
         setTimeout(() => {
           setErrorMessage('');
         }, 5000);
