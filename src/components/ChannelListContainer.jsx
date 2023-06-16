@@ -54,7 +54,7 @@ const ChannelListContent = ({isCrt, setIsCrt, setCreateTp, setIsRegis, setIsVis,
     cookies.remove('fullName');
     cookies.remove('avatarURL');
     cookies.remove('hashedPass');
-    cookies.remove('phoneNr');
+    cookies.remove('phone Nr.');
 
     window.location.reload();
   }

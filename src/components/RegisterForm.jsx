@@ -11,7 +11,7 @@ const RegisterForm = ({setIsRegis, setIsVis}) => {
   const [seite, setSeite] = useState('');
   const [beschreibung, setBeschreibung] = useState('');
 
-  const student = cookies.get('phone Nr.').split('@')[0] || cookies.get('fullName');
+  const student = cookies.get('phone Nr.')|| cookies.get('fullName');
 
   /**
    * The function submits the registration form outlined in the return statement

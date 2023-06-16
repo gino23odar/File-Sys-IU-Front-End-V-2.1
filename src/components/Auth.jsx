@@ -57,9 +57,9 @@ const Auth = () => {
       cookies.set('username', username);
       cookies.set('fullName', fullName);
       cookies.set('userId', userId);
+      cookies.set('phone Nr.', phoneNr);
   
       if (isSignup) {
-        cookies.set('phone Nr.', phoneNr);
         cookies.set('avatarURL', avatarURL);
         cookies.set('hashedPass', hashedPassword);
       }

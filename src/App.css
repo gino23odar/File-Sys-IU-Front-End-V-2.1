@@ -783,8 +783,14 @@ body{
   padding: 0 16px;
 }
 
+.team-channel-ui{
+  display: flex;
+  align-items: flex-end;
+}
+
 .team-channel-inputControl{
   display: flex;
+  flex:2;
 }
 .team-channel-deleteButton-return{
   display: flex;
@@ -855,7 +861,7 @@ body{
   width: auto;
   background-color: var(--primary-color);
   border-radius: 5%;
-  bottom: -8%;
+  bottom: 10px;
   left: 20px;
   z-index: 6;
 }

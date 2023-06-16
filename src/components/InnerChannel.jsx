@@ -89,9 +89,11 @@ const InnerChannel = ({ setIsRegis }) => {
           <HeaderTC/>
           <MessageList />
           {/* fit the button to be next to the input component */}
-          <div className = 'team-channel-inputControl'>
-          <button className = 'team-channel-registrationButton' onClick={()=>{if(setIsRegis){setIsRegis((prevState)=> !prevState)}}}>Anmeldungen</button>
-            <MessageInput overrideSubmitHandler={overrideSubmitHandler} />
+          <div className='team-channel-ui'>
+            <button className = 'team-channel-registrationButton' onClick={()=>{if(setIsRegis){setIsRegis((prevState)=> !prevState)}}}>Anmeldungen</button>
+            <div className = 'team-channel-inputControl'>
+              <MessageInput overrideSubmitHandler={overrideSubmitHandler} />
+            </div>
           </div>
         </Window>
         <Thread />
