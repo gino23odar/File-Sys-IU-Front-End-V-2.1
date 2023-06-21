@@ -11,4 +11,5 @@ export {default as RegisterForm} from './RegisterForm';
 export {default as UserList} from './UserList';
 export {default as ResultsDropdown} from './ResultsDropdown';
 export {default as RegisterTable} from './RegisterTable';
+export {default as UserSettings} from './UserSettings';
 

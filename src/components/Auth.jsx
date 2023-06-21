@@ -129,7 +129,7 @@ const Auth = () => {
             )}
             {isSignup && (
               <div className='authForm-contFields-content-input'>
-                <label htmlFor='avatarURL'>Avatar URL</label>
+                <label htmlFor='avatarURL'>Avatar URL *</label>
                 <input name='avatarURL' type='text' placeholder='Avatar URL' onChange={handleChange}/>
               </div>
             )}

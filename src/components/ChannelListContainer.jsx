@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {ChannelList, useChatContext} from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 
-import {ChannelSearch, TeamChannelList, TeamChannelPreview} from './';
+import {ChannelSearch, TeamChannelList, TeamChannelPreview, UserSettings} from './';
 import IUicon from '../assets/IU-logo.svg';
 import logouticon from '../assets/logouticon.jpg';
+import gearicon from '../assets/gear-icon.svg';
 
 const cookies = new Cookies();
 
@@ -12,7 +13,7 @@ const cookies = new Cookies();
  * This is a functional component for a sidebar with icons for navigating to the main chat page and
  * logging out.
  */
-const SideBar = ({logout, setIsCrt, setIsRegis, setIsVis}) => (
+const SideBar = ({logout, setIsCrt, setIsRegis, setIsVis, toggleSettings, toggleGear}) => (
   <div className='channel-list-sidebar'>
     <div className='channel-list-sidebar-icon1'>
       <div className='icon1' onClick={()=>{setIsCrt(false); setIsRegis(false); setIsVis(false);}}>
@@ -22,6 +23,9 @@ const SideBar = ({logout, setIsCrt, setIsRegis, setIsVis}) => (
     <div className='channel-list-sidebar-icon2'>
       <div className='icon2' onClick={logout}>
         <img src={logouticon} alt='Logout' width='30' />
+      </div>
+      <div className='icon2' onClick={toggleGear}>
+        <img src={gearicon} alt='Settings' width='30' />
       </div>
     </div>
   </div>
@@ -43,7 +47,7 @@ const customChannelDMsFilter = (channels)=>{
 
 /* The `ChannelListContent` component renders the general outlook of the right
   panel of the application (save for the sidebar) */
-const ChannelListContent = ({isCrt, setIsCrt, setCreateTp, setIsRegis, setIsVis, setToggleContainer}) => {
+const ChannelListContent = ({isCrt, setIsCrt, setCreateTp, setIsRegis, setIsVis, setToggleContainer, toggleSettings, toggleGear}) => {
   const {client} = useChatContext();
   
   // clear the cookies to logout
@@ -63,6 +67,10 @@ const ChannelListContent = ({isCrt, setIsCrt, setCreateTp, setIsRegis, setIsVis,
 
   return (
     <>
+      {toggleSettings && 
+        <UserSettings 
+          logout={logout}/>
+      }
       <div className='channel-list__list-wrapper'>
         <CompanyHeader />
         <ChannelSearch />
@@ -122,22 +130,40 @@ const ChannelListContent = ({isCrt, setIsCrt, setCreateTp, setIsRegis, setIsVis,
         logout={logout}
         setIsCrt={setIsCrt} 
         setIsRegis={setIsRegis} 
-        setIsVis={setIsVis}/>
+        setIsVis={setIsVis}
+        toggleSettings={toggleSettings}
+        toggleGear={toggleGear}/>
     </>
   );
 }
 
 const ChannelListContainer = ({setCreateTp, setIsCrt, setIsRegis, setIsVis}) =>{
   const [toggleContainer, setToggleContainer] = useState(false);
+  const [toggleSettings, setToggleSettings] = useState(false);
+
+  const toggleGear = () =>{
+    setToggleSettings((prev) => !prev);
+  }
+
+  useEffect(() => {
+    if (toggleSettings) {
+      document.body.classList.add('userSettings-wrapper-visible');
+    } else {
+      document.body.classList.remove('userSettings-wrapper-visible');
+    }
+  }, [toggleSettings]);
 
   return(
     <>
+      {console.log(toggleSettings)}
       <div className='channel-list-cont'>
         <ChannelListContent 
           setIsCrt ={setIsCrt}
           setCreateTp ={setCreateTp}
           setIsRegis = {setIsRegis}
           setIsVis={setIsVis}
+          toggleSettings={toggleSettings}
+          toggleGear={toggleGear}
         />
       </div>
     
