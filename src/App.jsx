@@ -36,7 +36,7 @@ const App = () => {
   const [isRegis, setIsRegis] = useState(false);
   const [isVis, setIsVis] = useState(false);
 
-if(!authToken) return <Auth />
+  if(!authToken) return <Auth />
 
   return (
     <div className='appWrapper'>

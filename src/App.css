@@ -317,6 +317,10 @@ body{
   cursor: pointer;
 }
 
+.channel-list-sidebar-icon2 div img{
+  pointer-events: none;
+}
+
 .channel-name-inputWrapper {
   display: flex;
   flex-direction: column;
@@ -608,6 +612,10 @@ body{
   justify-content: center;
 }
 
+.icon1 img{
+  pointer-events: none;
+}
+
 .icon3{
   height: 100%;
   display: flex;
@@ -615,6 +623,14 @@ body{
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.icon3 img{
+  pointer-events: none;
+}
+
+.icon4{
+  margin:0;
 }
 
 .register-channelHeader-cont {
@@ -995,6 +1011,29 @@ body{
   box-shadow: 8px 10px 20px var(--primary-color);
 }
 
+.userSettings-change-wrapper{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 50%;
+  background-color: white;
+  border-radius: 50px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--primary-color);
+  box-shadow: 8px 10px 20px var(--primary-color);
+}
+
+.userSettings-change{
+  width:95%;
+  height:90%;
+}
+
 .userSettings-wrapper > *{
   z-index: 101;
 }
@@ -1040,4 +1079,92 @@ body.userSettings-wrapper-visible .userSettings-wrapper {
 .userSettings-option:hover{
   cursor: pointer;
   color:#38115a;
+}
+
+.settings-head{
+  width: 100%;
+  height:20%;
+  top:0;
+  left:0;
+  display:flex;
+  align-items: center;
+  justify-content:center;
+}
+.settings-body{
+  width: 100%;
+  height:80%;
+  top:0;
+  left:0;
+  display:flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.settings-head p{
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 50px;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin:auto;
+  padding:0;
+}
+
+.settings-head img{
+  pointer-events: none;
+}
+
+.settings-input{
+  padding: 10px;
+  width: 65%;
+  border: none;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  font-size: 16px;
+  color: #333;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.settings-input:focus {
+  outline: none;
+  background-color: #ffd700;
+  transform: scale(1.03);
+}
+
+.settings-button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 50px;
+  background-color: var(--primary-color);
+  color: #fff;
+  margin-top:5px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.settings-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.settings-button:active {
+  background-color: #003080;
+  transform: translateY(1px);
+}
+
+.settings-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
