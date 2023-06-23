@@ -664,7 +664,7 @@ body{
 .registerForm-contFields-cont{
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: flex-end;
   padding: 1rem;
   box-shadow: 0px 1px 5px rgb(0 0 0 / 10%);
   border-radius: 50px;
@@ -697,6 +697,18 @@ body{
   outline: none;
   transition: all 150ms ease-in-out 0s;
   width: auto;
+  background: #fff;
+}
+
+.authForm-contFields-content-input select{
+  display: block;
+  padding: 0.55rem 0.4rem;
+  border: 1px solid rgb(184, 196, 194);
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: all 150ms ease-in-out 0s;
+  width: 86%;
   background: #fff;
 }
 

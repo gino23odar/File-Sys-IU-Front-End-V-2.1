@@ -1,18 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
+import {useChatContext} from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
 
 const cookies = new Cookies();
-
 
 const RegisterForm = ({setIsRegis, setIsVis}) => {
   const [fach, setFach] = useState('');
   const [dateiName, setDateiName] = useState('');
   const [seite, setSeite] = useState('');
   const [beschreibung, setBeschreibung] = useState('');
-
+  const [teamChannel, setTeamChannel] = useState([]);
+  const {client} = useChatContext();
+  
   const student = cookies.get('phone Nr.').split('@')[0]|| cookies.get('fullName');
-
   /**
    * The function submits the registration form outlined in the return statement
    * to the heroku server and displays an alert message.
@@ -33,9 +34,30 @@ const RegisterForm = ({setIsRegis, setIsVis}) => {
     alert('register made, please check in the list');
   };
 
+  const getChannel = async() => {
+    try {
+      // Filter Channels
+      const channelResponse = client.queryChannels({
+        members: {$in: [client.userID]},
+        type: 'team', 
+      });
+      const channels = await Promise.resolve(channelResponse);
+      if (channels.length) {
+        setTeamChannel(channels);
+      }
+    } catch(error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    getChannel(); 
+  }, []);
+
   return (
     <div>
       <div className='register-channelHeader-cont'>RegisterForm</div>
+      {console.log(teamChannel.map((channel)=>channel.data.id))}
       <div className='registerForm-cont'>
         <div className='authForm-contFields'>
           <div className='registerForm-contFields-cont'>
@@ -49,7 +71,14 @@ const RegisterForm = ({setIsRegis, setIsVis}) => {
               </div> */}
               <div className='authForm-contFields-content-input'>
                 <label htmlFor='Fach'>Fach</label>
-                <input name='Fach' type='text' placeholder='Fach' onChange={(e)=>{ setFach(e.target.value);}} required/>
+                <select name="Fach" onChange={(e) => { setFach(e.target.value); }} required>
+                  <option value="">Fach wählen</option>
+                  {teamChannel.map((option) => (
+                    <option key={option.data.id} value={option.data.id}>
+                      {option.data.id}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className='registerForm-contFields-contInput'>
                 <label htmlFor='DateiName'>Datei Name</label>
@@ -80,5 +109,4 @@ const RegisterForm = ({setIsRegis, setIsVis}) => {
     </div>
   )
 }
-
 export default RegisterForm

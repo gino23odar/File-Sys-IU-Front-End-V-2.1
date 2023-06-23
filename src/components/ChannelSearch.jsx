@@ -28,7 +28,7 @@ const ChannelSearch = ({setToggleContainer}) => {
    direct message channels accordingly.*/
   const getChannel = async(text) =>{
     try{
-      //fetch Channels
+      //filter Channels
       const channelResponse = client.queryChannels({
         name: {$autocomplete: text}, 
         members: {$in: [client.userID]},

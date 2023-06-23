@@ -2,6 +2,10 @@ import React, {useState} from 'react';
 import logoutIc from '../assets/logout.svg';
 import returnicon from '../assets/return.svg';
 import imageSwap from '../assets/imageSwap.svg';
+import { useChatContext } from 'stream-chat-react';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const PassChange = ({togglePassForm, handleChange}) =>{
   const changePassword = () => {
@@ -28,10 +32,28 @@ const PassChange = ({togglePassForm, handleChange}) =>{
   )
 }
 
-const AvatarChange = ({toggleAvatarForm, handleChange}) =>{
+const AvatarChange = ({toggleAvatarForm, client}) =>{
+  const [newAvatarURL, setNewAvatarURL] = useState('');
 
-  const changeAvatar = () => {
-    console.log('hi');
+  const handleChange = (e) => {
+    setNewAvatarURL(e.target.value);
+  }
+
+  const changeAvatar = async() => {
+    try{
+      let update = {
+        id: client.userID,
+        set:{
+          image: newAvatarURL
+        }
+      }
+      await client.partialUpdateUser(update)
+      cookies.set('avatar', newAvatarURL);
+      toggleAvatarForm();
+    } catch(err){
+      console.log(err);
+    }
+    console.log('hi')
   }
 
   return(
@@ -57,6 +79,7 @@ const UserSettings = ({logout}) => {
   const [passForm, setPassForm] = useState(false);
   const [avatarForm, setAvatarForm] = useState(false);
   const [form, setForm] = useState({});
+  const {client} = useChatContext();
   const [passwordMatch, setPasswordMatch] = useState(true);
 
   const togglePassForm = () =>{
@@ -87,8 +110,9 @@ const UserSettings = ({logout}) => {
     <div className='userSettings-change-wrapper'>
       <AvatarChange 
         toggleAvatarForm={toggleAvatarForm}
-        onChange={handleChange}
+        client={client}
       />
+      {console.log(client)}
     </div>
   )
 

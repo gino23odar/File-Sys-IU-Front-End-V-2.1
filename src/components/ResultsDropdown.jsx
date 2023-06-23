@@ -1,17 +1,34 @@
 import React from 'react';
-import { Avatar } from 'stream-chat-react';
+import { Avatar, useChatContext } from 'stream-chat-react';
 
-/**
- * This component renders the search result for the dropdown menu.
- */
-const SResult = ({ channel, setChannel, queryId, type, toggleDropdownVisibility  }) => {
-  /**
-   * This function sets a channel and toggles the visibility of a dropdown menu.
-   */
-  const handleClick = () => {
-    setChannel(channel);
-    if (toggleDropdownVisibility ) {
-      toggleDropdownVisibility ((prevState) => !prevState);
+const SResult = ({ channel, setChannel, queryId, type, toggleDropdownVisibility }) => {
+  const { client, setActiveChannel } = useChatContext();
+
+  const channelByUser = async () => {
+    const filters = {
+      type: 'messaging',
+      member_count: 2,
+      members: { $eq: [client.user.id, client.userID] },
+    };
+
+    const [existingChannel] = await client.queryChannels(filters);
+
+    if (existingChannel) return setActiveChannel(existingChannel);
+
+    const newChannel = client.channel('messaging', { members: [channel.id, client.userID] });
+
+    setChannel(newChannel);
+
+    return setActiveChannel(newChannel);
+  };
+
+  const handleClick = async () => {
+    if (type === 'user') {
+      await channelByUser();
+    }
+
+    if (toggleDropdownVisibility) {
+      toggleDropdownVisibility((prevState) => !prevState);
     }
   };
 
@@ -34,17 +51,38 @@ const SResult = ({ channel, setChannel, queryId, type, toggleDropdownVisibility 
     </div>
   );
 };
-const ResultsDropdown = ({ teamChannels, directChannels, setChannel, queryId, loading, toggleDropdownVisibility  }) => {
+
+const ResultsDropdown = ({ teamChannels, directChannels, setChannel, queryId, loading, toggleDropdownVisibility }) => {
+  const { client } = useChatContext();
+
+  // const channelByUser = async ({ channel, setActiveChannel }) => {
+  //   const filters = {
+  //     type: 'messaging',
+  //     member_count: 2,
+  //     members: { $eq: [client.user.id, client.userID] },
+  //   };
+
+  //   const [existingChannel] = await client.queryChannels(filters);
+
+  //   if (existingChannel) return setActiveChannel(existingChannel);
+
+  //   const newChannel = client.channel('messaging', { members: [channel.id, client.userID] });
+
+  //   setChannel(newChannel);
+
+  //   return setActiveChannel(newChannel);
+  // };
+
   return (
-    <div className='channel-search-results'>
-      <p className='channel-search-resultsHeader'>Channels</p>
+    <div className="channel-search-results">
+      <p className="channel-search-resultsHeader">Channels</p>
       {loading && !teamChannels.length && (
-        <p className='channel-search-resultsHeader'>
+        <p className="channel-search-resultsHeader">
           <i>Channel ladet noch...</i>
         </p>
       )}
       {!loading && !teamChannels.length ? (
-        <p className='channel-search-resultsHeader'>
+        <p className="channel-search-resultsHeader">
           <i>Keine Channels gefunden</i>
         </p>
       ) : (
@@ -54,19 +92,19 @@ const ResultsDropdown = ({ teamChannels, directChannels, setChannel, queryId, lo
             queryId={queryId}
             key={i}
             setChannel={setChannel}
-            type='channel'
-            toggleDropdownVisibility ={toggleDropdownVisibility }
+            type="channel"
+            toggleDropdownVisibility={toggleDropdownVisibility}
           />
         ))
       )}
-      <p className='channel-search-resultsHeader'>Benutzer</p>
+      <p className="channel-search-resultsHeader">Benutzer</p>
       {loading && !directChannels.length && (
-        <p className='channel-search-resultsHeader'>
+        <p className="channel-search-resultsHeader">
           <i>Channel ladet noch...</i>
         </p>
       )}
       {!loading && !directChannels.length ? (
-        <p className='channel-search-resultsHeader'>
+        <p className="channel-search-resultsHeader">  
           <i>Keine private Nachrichten gefunden...</i>
         </p>
       ) : (
@@ -76,8 +114,8 @@ const ResultsDropdown = ({ teamChannels, directChannels, setChannel, queryId, lo
             queryId={queryId}
             key={i}
             setChannel={setChannel}
-            type='user'
-            toggleDropdownVisibility ={toggleDropdownVisibility }
+            type="user"
+            toggleDropdownVisibility={toggleDropdownVisibility}
           />
         ))
       )}
