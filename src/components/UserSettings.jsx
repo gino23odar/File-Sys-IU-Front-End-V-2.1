@@ -7,9 +7,40 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-const PassChange = ({togglePassForm, handleChange}) =>{
-  const changePassword = () => {
-    console.log('hi');
+const PassChange = ({togglePassForm, client}) =>{
+  const [passwordMatch, setPasswordMatch] = useState(true);
+  const [form, setForm] = useState({});
+  const [newPass, setNewPass] = useState('');
+
+  const handleChange=(e)=>{
+    setForm({...form, [e.target.name]: e.target.value});
+      // Check password matching
+    if (e.target.name === "confirmPass") {
+      setPasswordMatch(e.target.value === form.newPassword);
+    }
+  }
+
+  //change this to be handled from the backend, this could be a security issue
+  //temporarily handled with bcryptjs but should be handled with a new route on the backend with bcrypt 
+  const handleForm = (e) => {
+    e.preventDefault();
+    console.log('here');
+  }
+
+  const changePassword = async() => {
+    try{
+      let update = {
+        id: client.userID,
+        set:{
+          password: form.newPassword
+        }
+      }
+      await client.partialUpdateUser(update)
+      togglePassForm();
+    } catch(err){
+      console.log(err);
+    }
+    console.log('hi')
   }
 
   return(
@@ -21,11 +52,20 @@ const PassChange = ({togglePassForm, handleChange}) =>{
         <p> Password ändern</p>
       </div>
       <div className='settings-body'>
-        <form className='settings-form'>
-          <input className='settings-input' name='password' type='text' placeholder='aktuelles Kentwort' onChange={handleChange} />
-          <input className='settings-input' name='newPassword' type='text' placeholder='neues Kenntwort' onChange={handleChange} />
-          <input className='settings-input' name='confirmPass' type='text' placeholder='neues Kenntwort bestätigen' onChange={handleChange} />
-          <button className='settings-button' onClick={()=>changePassword()}>ändern</button>
+        <form className='settings-form' onSubmit={handleForm}>
+          <input className='settings-input' name='password' type='text' placeholder='aktuelles Kentwort' onChange={handleChange} required/>
+          <input className='settings-input' name='newPassword' type='text' placeholder='neues Kenntwort' onChange={handleChange} required/>
+          <input 
+            className='settings-input' 
+            name='confirmPass' 
+            type='text' 
+            placeholder='neues Kenntwort bestätigen' 
+            onChange={handleChange} 
+            pattern={form.newPassword} 
+            required
+          />
+          {!passwordMatch && <div className='errorMessage'>Stellen Sie sicher, dass Sie dasselbe Passwort verwenden.</div>}
+          <button className='settings-button'>ändern</button>
         </form>
       </div>
     </div>
@@ -78,9 +118,8 @@ const AvatarChange = ({toggleAvatarForm, client}) =>{
 const UserSettings = ({logout}) => {
   const [passForm, setPassForm] = useState(false);
   const [avatarForm, setAvatarForm] = useState(false);
-  const [form, setForm] = useState({});
+  
   const {client} = useChatContext();
-  const [passwordMatch, setPasswordMatch] = useState(true);
 
   const togglePassForm = () =>{
     setPassForm((prev)=>!prev);
@@ -90,19 +129,12 @@ const UserSettings = ({logout}) => {
     setAvatarForm((prev)=>!prev);
   }
 
-  const handleChange=(e)=>{
-    setForm({...form, [e.target.name]: e.target.value});
-      // Check password matching
-    if (e.target.name === "confirmPass") {
-      setPasswordMatch(e.target.value === form.password);
-    }
-  }
 
   if(passForm) return(
     <div className='userSettings-change-wrapper'>
       <PassChange 
         togglePassForm={togglePassForm}
-        onChange={handleChange}
+        client={client}
       />
     </div>
   )
