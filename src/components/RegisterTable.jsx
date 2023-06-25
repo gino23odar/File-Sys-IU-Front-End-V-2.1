@@ -14,6 +14,7 @@ const RegisterTable = ({setIsVis}) => {
     tool with the stream-chat API to manage the users*/
   const adminList = [
     "40a45ef8f30fc503feb5fd1b2ef620e6",
+    "2f12af19cd8f1275c98f2b7acf6f2a41"
   ]
 
   const columns = [
