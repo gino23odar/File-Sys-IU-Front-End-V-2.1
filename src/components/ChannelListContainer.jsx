@@ -21,9 +21,9 @@ const SideBar = ({logout, setIsCrt, setIsRegis, setIsVis, toggleSettings, toggle
       </div>
     </div>
     <div className='channel-list-sidebar-icon2'>
-      <div className='icon2' onClick={logout}>
+      {/* <div className='icon2' onClick={logout}>
         <img src={logouticon} alt='Logout' width='40' />
-      </div>
+      </div> */}
       <div className='icon2' onClick={toggleGear}>
         <img src={gearicon} alt='Settings' width='50' />
       </div>
