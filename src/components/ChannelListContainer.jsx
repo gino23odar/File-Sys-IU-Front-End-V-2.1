@@ -4,7 +4,6 @@ import Cookies from 'universal-cookie';
 
 import {ChannelSearch, TeamChannelList, TeamChannelPreview, UserSettings} from './';
 import IUicon from '../assets/IU-logo.svg';
-import logouticon from '../assets/logouticon.jpg';
 import gearicon from '../assets/gear-icon.svg';
 
 const cookies = new Cookies();
@@ -13,7 +12,7 @@ const cookies = new Cookies();
  * This is a functional component for a sidebar with icons for navigating to the main chat page and
  * logging out.
  */
-const SideBar = ({logout, setIsCrt, setIsRegis, setIsVis, toggleSettings, toggleGear}) => (
+const SideBar = ({logout, setIsCrt, setIsRegis, setIsVis, toggleGear}) => (
   <div className='channel-list-sidebar'>
     <div className='channel-list-sidebar-icon1'>
       <div className='icon1' onClick={()=>{setIsCrt(false); setIsRegis(false); setIsVis(false);}}>
@@ -21,9 +20,6 @@ const SideBar = ({logout, setIsCrt, setIsRegis, setIsVis, toggleSettings, toggle
       </div>
     </div>
     <div className='channel-list-sidebar-icon2'>
-      {/* <div className='icon2' onClick={logout}>
-        <img src={logouticon} alt='Logout' width='40' />
-      </div> */}
       <div className='icon2' onClick={toggleGear}>
         <img src={gearicon} alt='Settings' width='50' />
       </div>
@@ -31,7 +27,7 @@ const SideBar = ({logout, setIsCrt, setIsRegis, setIsVis, toggleSettings, toggle
   </div>
 );
 
-const CompanyHeader = () => (
+const UniName = () => (
   <div className='channel-listHeader'>
     <p className='channel-listHeader-text'>File-SYS IU</p>
   </div>
@@ -72,7 +68,7 @@ const ChannelListContent = ({isCrt, setIsCrt, setCreateTp, setIsRegis, setIsVis,
           logout={logout}/>
       }
       <div className='channel-list__list-wrapper'>
-        <CompanyHeader />
+        <UniName />
         <ChannelSearch />
         <ChannelList 
           filters={filters} 
@@ -167,7 +163,7 @@ const ChannelListContainer = ({setCreateTp, setIsCrt, setIsRegis, setIsVis}) =>{
         />
       </div>
     
-      <div className='channel-list-cont-responsive' style={{left: toggleContainer ? '0%' : '-89%', backgroundColor: '#005fff'}}>
+      <div className='channel-list-cont-responsive' style={{right: toggleContainer ? '-25%' : '-100%', backgroundColor: '#005fff'}}>
         <div className='channel-list-cont-toggle' onClick={()=> setToggleContainer((prevToggleContainer) => !prevToggleContainer)}>
         </div>
         <ChannelListContent 

@@ -118,11 +118,11 @@ const Auth = () => {
                 <label htmlFor='phoneNr'>Email</label>
                 <input
                   name='phoneNr'
-                  type='text'
+                  type='email'
                   placeholder='Email'
                   onChange={handleChange}
                   required
-                  pattern='^[a-zA-Z0-9._%+-]+@(iubh-fernstudium\.de|iu\.de|iu\.org)$'
+                  pattern='^[\w.]+@(iubh-fernstudium\.de|iu\.de|iu\.org)$'
                   title='Bitte verwenden Sie eine gültige IU-EMail: @iubh-fernstudium.de, @iu.de, @iu.org'
                 />
               </div>

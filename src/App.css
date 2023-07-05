@@ -275,6 +275,7 @@ body{
 
   .channel-list-cont-toggle {
     display: flex;
+    
   }
 
   .channel-search-inputWrapper {
@@ -290,6 +291,28 @@ body{
   .channel-search-results {
     top: 100%;
     left: 5%;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .channel-list-cont-toggle{
+    right: -3%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .channel-preview-item.multi {
+    width: 150px;
+  }
+
+  .channel-list-cont-toggle {
+    right: -5%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .channel-list-sidebar {
+    display: none;
   }
 }
 
@@ -480,9 +503,9 @@ body{
   display: flex;
   align-items: center;
   font-family: Helvetica Neue, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: #ffffff;
-  padding: 0px 20px;
+  padding: 0px 10px;
   height: 100%;
   width: 100%;
   text-overflow: ellipsis;
@@ -494,6 +517,26 @@ body{
   margin-right: 12px;
 }
 
+.str-chat__load-more-button {
+  display: none;
+}
+
+.str-chat__input-footer {
+  display: none;
+}
+
+.str-chat__date-separator {
+  margin: 16px 24px;
+}
+
+.str-chat__edit-message-form textarea {
+  box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+.str-chat__edit-message-form textarea:focus {
+  border: 1px solid var(--primary-color);
+  box-shadow: 0 0 0 1px var(--primary-color);
+}
 
 /* should I let them be the default?*/
 .channel-previewWrapper {
@@ -522,6 +565,35 @@ body{
   font-weight: bold;
   margin-right: 16px;
   cursor: pointer;
+}
+
+.team-message-input__wrapper .str-chat__textarea textarea {
+  display: flex;
+  background: #fff;
+  border: none;
+  outline: none;
+  font-family: Helvetica Neue, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.team-message-input__wrapper .str-chat__textarea textarea:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: #fff;
+}
+
+.team-message-input__wrapper .str-chat__textarea textarea::placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.str-chat__input-flat {
+  width: 100%;
+  padding: 10px;
 }
 /* until here*/
 
